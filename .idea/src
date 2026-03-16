@@ -1,0 +1,44 @@
+public class Hotel {
+
+    private int id;
+    private String name;
+    private int totalRooms;
+    private int availableRooms;
+
+    public Hotel(int id, String name, int totalRooms) {
+        this.id = id;
+        this.name = name;
+        this.totalRooms = totalRooms;
+        this.availableRooms = totalRooms;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAvailableRooms() {
+        return availableRooms;
+    }
+
+    public boolean bookRoom() {
+        if (availableRooms > 0) {
+            availableRooms--;
+            return true;
+        }
+        return false;
+    }
+
+    public void cancelRoom() {
+        if (availableRooms < totalRooms) {
+            availableRooms++;
+        }
+    }
+
+    public void display() {
+        System.out.println(id + " | " + name + " | Available Rooms: " + availableRooms);
+    }
+}
