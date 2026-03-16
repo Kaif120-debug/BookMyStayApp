@@ -1,117 +1,47 @@
-import java.util.*;
-
-class Hotel {
-    int id;
-    String name;
-    int totalRooms;
-    int availableRooms;
-
-    Hotel(int id, String name, int rooms) {
-        this.id = id;
-        this.name = name;
-        this.totalRooms = rooms;
-        this.availableRooms = rooms;
-    }
-
-    boolean bookRoom() {
-        if (availableRooms > 0) {
-            availableRooms--;
-            return true;
-        }
-        return false;
-    }
-
-    void display() {
-        System.out.println(id + " - " + name + " | Available Rooms: " + availableRooms);
-    }
-}
-
-class Booking {
-    String customerName;
-    int hotelId;
-
-    Booking(String name, int hotelId) {
-        this.customerName = name;
-        this.hotelId = hotelId;
-    }
-}
+import java.util.Scanner;
 
 public class BookMyStayApp {
 
-    static Map<Integer, Hotel> hotels = new HashMap<>();
-    static Queue<Booking> bookingQueue = new LinkedList<>();
-
     public static void main(String[] args) {
 
-        Scanner sc = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
-        // Initial hotel data
-        hotels.put(1, new Hotel(1, "Sea View Resort", 5));
-        hotels.put(2, new Hotel(2, "Mountain Lodge", 3));
-        hotels.put(3, new Hotel(3, "City Palace Hotel", 4));
+        // Application Entry
+        System.out.println("=================================");
+        System.out.println("      WELCOME TO BOOK MY STAY    ");
+        System.out.println("   Hotel Booking Management App  ");
+        System.out.println("=================================");
 
-        while (true) {
+        System.out.println("\nPress Enter to continue...");
+        scanner.nextLine();
 
-            System.out.println("\n==== BOOK MY STAY ====");
-            System.out.println("1. View Hotels");
-            System.out.println("2. Add Booking Request");
-            System.out.println("3. Process Booking (FIFO)");
-            System.out.println("4. Exit");
-            System.out.print("Enter choice: ");
+        // Main Menu
+        System.out.println("\nMain Menu");
+        System.out.println("1. View Hotels");
+        System.out.println("2. Book Room");
+        System.out.println("3. Exit");
 
-            int choice = sc.nextInt();
+        System.out.print("Enter your choice: ");
 
-            switch (choice) {
+        int choice = scanner.nextInt();
 
-                case 1:
-                    System.out.println("\nAvailable Hotels:");
-                    for (Hotel h : hotels.values()) {
-                        h.display();
-                    }
-                    break;
+        switch (choice) {
+            case 1:
+                System.out.println("Hotel list feature coming soon...");
+                break;
 
-                case 2:
-                    sc.nextLine();
-                    System.out.print("Enter Customer Name: ");
-                    String name = sc.nextLine();
+            case 2:
+                System.out.println("Room booking feature coming soon...");
+                break;
 
-                    System.out.print("Enter Hotel ID: ");
-                    int hotelId = sc.nextInt();
+            case 3:
+                System.out.println("Thank you for using Book My Stay!");
+                break;
 
-                    bookingQueue.add(new Booking(name, hotelId));
-                    System.out.println("Booking request added to queue.");
-                    break;
-
-                case 3:
-
-                    if (bookingQueue.isEmpty()) {
-                        System.out.println("No booking requests.");
-                        break;
-                    }
-
-                    Booking request = bookingQueue.poll();
-                    Hotel hotel = hotels.get(request.hotelId);
-
-                    if (hotel == null) {
-                        System.out.println("Invalid Hotel ID.");
-                    }
-                    else if (hotel.bookRoom()) {
-                        System.out.println("Booking confirmed for " + request.customerName +
-                                " at " + hotel.name);
-                    }
-                    else {
-                        System.out.println("No rooms available at " + hotel.name);
-                    }
-
-                    break;
-
-                case 4:
-                    System.out.println("Thank you for using Book My Stay!");
-                    System.exit(0);
-
-                default:
-                    System.out.println("Invalid choice.");
-            }
+            default:
+                System.out.println("Invalid choice.");
         }
+
+        scanner.close();
     }
 }
